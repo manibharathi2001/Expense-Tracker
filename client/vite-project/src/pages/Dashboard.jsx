@@ -6,7 +6,7 @@ import StatCard from '../components/StatCard'
 import SpendingChart from '../components/SpendingChart'
 import CategoryChart from '../components/CategoryChart'
 import TransactionList from '../components/TransactionList'
-import Model from '../components/Model' // Fixed import
+import Model from '../components/Model' 
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
@@ -21,12 +21,6 @@ const Dashboard = () => {
             const res = await api.get('/expenses')
             const expenses = res.data.data || []
             const totalExpense = expenses.reduce((sum, e) => sum + Number(e.amount), 0)
-            // Assuming we only track expenses for now, income might be hardcoded or 0
-            // Or if category 'Income' exists. But model enum doesn't have Income.
-            // So for now Income is 0 or maybe user wants to add income?
-            // User requirement: "tracking expenses, income". But model only has expense categories.
-            // I'll assume for now only expenses are tracked, so Income is 0 or maybe budget?
-            // Let's just sum expenses.
             setStats({ income: 5000, expense: totalExpense }) // Hardcoded income for demo as no income source yet
         } catch (err) {
             console.error("Failed to fetch stats", err)

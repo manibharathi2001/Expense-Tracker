@@ -6,7 +6,12 @@ const app = express();
 
 //middleware
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+    origin: 'https://expense-tracker-frontend-psi-ruby.vercel.app',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}))
 
 app.get('/', (req, res) => {
     res.send('Expense Tracker API is running');
