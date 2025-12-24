@@ -4,9 +4,6 @@ const cors = require('cors')
 
 const app = express();
 
-//middleware
-app.use(express.json());
-
 const corsOptions = {
     origin: 'https://expense-tracker-frontend-psi-ruby.vercel.app',
     credentials: true,
@@ -16,6 +13,9 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
+
+//middleware
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('Expense Tracker API is running');
