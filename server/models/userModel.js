@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-});
+}, { bufferCommands: false });
 
 // Encrypt password using bcrypt
 userSchema.pre('save', async function (next) {

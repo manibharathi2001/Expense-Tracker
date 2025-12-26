@@ -27,8 +27,25 @@ const corsOptions = {
     allowedHeaders: ['Content-Type', 'Authorization']
 };
 
+const connectDB = require('./config/mongo');
+
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
+
+// Middleware to ensure DB connection is ready
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (err) {
+        console.error('DB Connection Middleware Error:', err.message);
+        res.status(500).json({
+            success: false,
+            message: 'Database connection failed. Check your MONGODB_URI and Atlas IP Whitelist.',
+            error: err.message
+        });
+    }
+});
 
 //middleware
 app.use(express.json());
