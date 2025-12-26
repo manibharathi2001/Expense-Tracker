@@ -19,8 +19,8 @@ const corsOptions = {
             return callback(null, true);
         }
 
-        // Reject other origins
-        callback(new Error('Not allowed by CORS'));
+        // Reject other origins (don't throw error, just return false)
+        callback(null, false);
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
