@@ -28,7 +28,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options(/(.*)/, cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 //middleware
 app.use(express.json());
@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 });
 
 //api routes
-
-app.use('/api/v1/auth', require('./routes/authRoutes'));
-app.use('/api/v1/', router)
+const authRoutes = require('./routes/authRoutes');
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1', router);
 module.exports = app
